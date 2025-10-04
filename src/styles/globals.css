@@ -1,0 +1,619 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+  --background: #ffffff;
+  --foreground: oklch(0.145 0 0);
+  --card: #ffffff;
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: #005478;
+  --primary-foreground: #ffffff;
+  --secondary: #4D81B3;
+  --secondary-foreground: #ffffff;
+  --muted: #ececf0;
+  --muted-foreground: #717182;
+  --accent: #67b6c4;
+  --accent-foreground: #ffffff;
+  --destructive: #d4183d;
+  --destructive-foreground: #ffffff;
+  --border: rgba(0, 0, 0, 0.1);
+  --input: transparent;
+  --input-background: #f3f3f5;
+  --switch-background: #cbced4;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: #005478;
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+@theme inline {
+  /* Custom breakpoints */
+  --breakpoint-xs: 475px;
+  
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Ensure ALL interactive elements show hand cursor - comprehensive coverage */
+  button,
+  a,
+  [role="button"],
+  [type="button"],
+  [type="submit"],
+  [type="reset"],
+  .cursor-pointer,
+  input[type="checkbox"],
+  input[type="radio"],
+  select,
+  /* Additional button selectors for comprehensive coverage */
+  .btn,
+  [class*="Button"],
+  [class*="button"],
+  [data-radix-collection-item],
+  [data-state],
+  /* Ensure shadcn/ui components show pointer cursor */
+  [data-radix-select-trigger],
+  [data-radix-dropdown-menu-trigger],
+  [data-radix-dialog-trigger],
+  [data-radix-popover-trigger],
+  [data-radix-accordion-trigger],
+  [data-radix-tabs-trigger],
+  [data-radix-toggle],
+  [data-radix-switch-thumb],
+  /* Badge components that might be clickable */
+  .badge[onclick],
+  /* Clickable images and logos */
+  img[onclick],
+  img.cursor-pointer,
+  /* Clickable divs and spans */
+  div[onclick],
+  span[onclick],
+  /* Ensure any element with click handlers shows pointer */
+  [onclick]:not(input[type="text"]):not(input[type="email"]):not(input[type="password"]):not(textarea):not(input[type="number"]):not(input[type="date"]):not(input[type="time"]):not(input[type="tel"]):not(input[type="url"]) {
+    cursor: pointer !important;
+  }
+
+  /* Default cursor for non-interactive elements */
+  div,
+  span,
+  p,
+  h1, h2, h3, h4, h5, h6,
+  label:not([for]),
+  img:not([onclick]):not([role="button"]) {
+    cursor: default;
+  }
+
+  /* Text cursor for text inputs and editable content */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="number"],
+  input[type="date"],
+  input[type="time"],
+  textarea,
+  [contenteditable="true"] {
+    cursor: text;
+  }
+
+  /* Disabled elements should not show pointer cursor */
+  button:disabled,
+  a:disabled,
+  [role="button"]:disabled,
+  input:disabled,
+  select:disabled,
+  textarea:disabled {
+    cursor: not-allowed !important;
+  }
+
+  /* Force pointer cursor on all button-like elements - ultimate fallback */
+  button:not(:disabled),
+  .button:not(:disabled),
+  .btn:not(:disabled),
+  [role="button"]:not(:disabled),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled) {
+    cursor: pointer !important;
+  }
+
+  /* Specific override for any remaining button elements */
+  *[class*="Button"]:not(:disabled),
+  *[class*="button"]:not(:disabled),
+  /* React component buttons */
+  [role="button"]:not(:disabled),
+  /* Interactive elements that should have pointer cursor */
+  .touch-manipulation:not(input):not(textarea):not(select),
+  /* Ensure all interactive clickable elements show pointer cursor */
+  button:not(:disabled):hover,
+  a:hover,
+  [role="button"]:not(:disabled):hover,
+  [onclick]:hover,
+  img[onclick]:hover,
+  div[onclick]:hover,
+  span[onclick]:hover {
+    cursor: pointer !important;
+  }
+
+  /* Specific targeting for main CTA and interactive buttons */
+  /* Language toggle button */
+  button:has([data-lucide="languages"]),
+  /* Main CTA buttons with specific classes */
+  button.bg-gradient-to-r,
+  button:has([data-lucide="sparkles"]),
+  button:has([data-lucide="play"]),
+  button:has([data-lucide="rocket"]),
+  /* Ensure language and CTA buttons always show pointer */
+  .cursor-pointer,
+  .touch-manipulation:not(input):not(textarea):not(select):not(.cursor-default) {
+    cursor: pointer !important;
+  }
+}
+
+/**
+ * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
+ */
+@layer base {
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+    h1 {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h2 {
+      font-size: var(--text-xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h3 {
+      font-size: var(--text-lg);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h4 {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    p {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+
+    label {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    button {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    input {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+  }
+}
+
+html {
+  font-size: var(--font-size);
+}
+
+/* Mobile-specific optimizations */
+.safe-area-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.touch-manipulation {
+  touch-action: manipulation;
+}
+
+/* Prevent zoom on double tap for iOS */
+@media screen and (max-width: 768px) {
+  button,
+  input,
+  select,
+  textarea {
+    touch-action: manipulation;
+  }
+  
+  /* Ensure minimum touch target size */
+  button,
+  .btn,
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Better text readability on small screens */
+  body {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+  
+  /* Prevent horizontal scroll */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+  }
+  
+  /* Ensure all containers don't overflow */
+  .container {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  
+  /* Prevent tables from causing horizontal scroll */
+  table {
+    table-layout: fixed;
+    width: 100%;
+  }
+  
+  /* Better responsive tables */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 0.5rem;
+  }
+  
+  /* Smoother scrolling on mobile */
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Enhanced scroll behavior for all devices */
+  * {
+    scroll-behavior: smooth;
+  }
+  
+  /* Mobile navbar optimizations */
+  header {
+    min-height: 60px;
+  }
+  
+  /* Ensure navbar buttons don't overlap */
+  header button {
+    flex-shrink: 0;
+  }
+  
+  /* Better spacing for mobile navbar */
+  header .container {
+    min-height: 60px;
+  }
+  
+  /* Mobile dropdown menu optimizations */
+  .mobile-menu-backdrop {
+    backdrop-filter: blur(4px);
+  }
+  
+  /* Smooth dropdown animations */
+  .mobile-dropdown {
+    animation: slide-down 0.2s ease-out forwards;
+  }
+  
+  /* Prevent scroll when mobile menu is open */
+  body.mobile-menu-open {
+    overflow: hidden;
+  }
+  
+  /* Better responsive spacing */
+  .responsive-padding {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  
+  /* Form elements responsive sizing */
+  .form-card {
+    margin-left: -4px;
+    margin-right: -4px;
+    border-radius: 12px;
+  }
+  
+  /* Mobile-first responsive grid */
+  .mobile-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  /* Better input sizing on mobile */
+  input, select, textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+    min-height: 44px;
+  }
+}
+
+/* Extra responsive breakpoints for better device adaptation */
+
+/* Very small phones (320px and below) */
+@media screen and (max-width: 320px) {
+  .container {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  
+  /* Ultra compact spacing */
+  .ultra-compact {
+    padding: 8px;
+    margin: 4px 0;
+  }
+  
+  /* Smaller text on very small screens */
+  .text-responsive {
+    font-size: 12px;
+  }
+  
+  /* Very compact cards */
+  .card-compact {
+    padding: 12px;
+  }
+  
+  /* Ensure no horizontal overflow on smallest screens */
+  * {
+    max-width: 100%;
+    word-wrap: break-word;
+  }
+  
+  /* Better button sizing for small screens */
+  button {
+    min-height: 40px;
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+  
+  /* Compact form elements */
+  .space-y-4 > * + * {
+    margin-top: 12px;
+  }
+  
+  .space-y-3 > * + * {
+    margin-top: 8px;
+  }
+}
+
+/* Small phones (321px - 375px) */
+@media screen and (min-width: 321px) and (max-width: 375px) {
+  .container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  
+  .responsive-text {
+    font-size: 14px;
+  }
+}
+
+/* Medium phones (376px - 414px) */
+@media screen and (min-width: 376px) and (max-width: 414px) {
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* Large phones and small tablets (415px - 640px) */
+@media screen and (min-width: 415px) and (max-width: 640px) {
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  /* Better spacing for larger mobile screens */
+  .form-section {
+    padding: 20px;
+  }
+}
+
+/* Extra small screens (phones in portrait) */
+@media screen and (max-width: 320px) {
+  /* Very compact mobile navbar for smallest screens */
+  header {
+    min-height: 56px;
+  }
+  
+  header .container {
+    min-height: 56px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  
+  /* Smaller buttons on very small screens */
+  header button {
+    min-height: 40px;
+    min-width: 40px;
+    font-size: 12px;
+  }
+  
+  /* Smaller logo on very small screens */
+  header img {
+    height: 24px;
+  }
+}
+
+/* Support for viewport units on mobile browsers */
+@supports (height: 100dvh) {
+  .min-h-screen {
+    min-height: 100dvh;
+  }
+}
+
+/* Enhanced scroll restoration and smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Improved scroll restoration for better UX */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Smooth transitions for page navigation */
+  .page-transition {
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+  
+  .page-enter {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  
+  .page-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Simplified animations for better performance */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+.animate-slide-down {
+  animation: slide-down 0.2s ease-out;
+}
+
+/* Interactive hover effects */
+.hover-glow:hover {
+  box-shadow: 0 0 30px rgba(103, 182, 196, 0.6);
+}
+
+.hover-lift {
+  transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}

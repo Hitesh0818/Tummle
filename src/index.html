@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#005478">
+    
+    <title>Tummle</title>
+    <meta name="description" content="Kein Suchen. Kein Swipen. Und auch sonst keine Verschwendung Deiner Zeit. Wir besorgen Dir den Job, den Du willst. Wann Du willst und wo Du willst.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tummle.com/">
+    <meta property="og:title" content="Tummle">
+    <meta property="og:description" content="Kein Suchen. Kein Swipen. Und auch sonst keine Verschwendung Deiner Zeit. Wir besorgen Dir den Job, den Du willst.">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tummle.com/">
+    <meta property="twitter:title" content="Tummle">
+    <meta property="twitter:description" content="Kein Suchen. Kein Swipen. Und auch sonst keine Verschwendung Deiner Zeit. Wir besorgen Dir den Job, den Du willst.">
+    
+    <!-- Favicon will be dynamically set by FaviconHandler component -->
+    
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <style>
+        /* Critical CSS for loading state */
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Loading state */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #005478 0%, #4D81B3 50%, #67b6c4 100%);
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Prevent flash of unstyled content */
+        #root {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        
+        #root.loaded {
+            opacity: 1;
+        }
+        
+        /* Mobile optimizations */
+        @media screen and (max-width: 768px) {
+            html {
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            body {
+                font-size: 16px; /* Prevent zoom on iOS */
+            }
+            
+            input, select, textarea {
+                font-size: 16px; /* Prevent zoom on iOS */
+            }
+        }
+        
+        /* Safe area support */
+        @supports (padding: max(0px)) {
+            .safe-area-top {
+                padding-top: max(env(safe-area-inset-top), 0px);
+            }
+            
+            .safe-area-bottom {
+                padding-bottom: max(env(safe-area-inset-bottom), 0px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <div class="loading">
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+    
+    <noscript>
+        <div style="text-align: center; padding: 50px; font-family: system-ui, sans-serif;">
+            <h1>JavaScript Required</h1>
+            <p>Please enable JavaScript to use TUMMLE.</p>
+            <p>Bitte aktivieren Sie JavaScript, um TUMMLE zu verwenden.</p>
+        </div>
+    </noscript>
+    
+    <script>
+        // Remove loading state when React app loads
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                const root = document.getElementById('root');
+                if (root) {
+                    root.classList.add('loaded');
+                }
+            }, 100);
+        });
+        
+        // Prevent zoom on double-tap for better mobile UX
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+        
+        // Better iOS experience
+        if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+            document.documentElement.style.webkitUserSelect = 'none';
+            document.documentElement.style.webkitTouchCallout = 'none';
+        }
+    </script>
+</body>
+</html>

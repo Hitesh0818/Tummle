@@ -1,0 +1,10 @@
+import faviconImage from 'figma:asset/ff8e33c66bea863f12622ae01e6afbda269ceb8c.png';
+
+// This file would normally contain the actual PNG image data
+// In a real deployment, you would:
+// 1. Download the Figma asset image
+// 2. Resize it to 32x32, 48x48, 64x64 pixels for favicon
+// 3. Save as favicon.png in the public directory
+// 
+// For now, this serves as a placeholder that references the correct Figma asset
+export default faviconImage;
