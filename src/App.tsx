@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react"; // 🚨 Added useEffect
 import { Button } from "./components/ui/button";
 import { Card, CardContent } from "./components/ui/card";
 import {
@@ -39,18 +39,18 @@ import { COLORS } from "./constants/colors";
 import type { FormType, Language } from "./types";
 import { getCurrentScrollPosition, restoreScrollPosition, scrollToTop } from "./utils/navigation";
 
-// Assets
-import logoImage from "figma:asset/4cfd463b1380bb2fa69d95e0b6157e3dc2be26a2.png";
-import heroImage from "figma:asset/5ad8a9d5cc5ee93c07b1d414ba2c84cc581de69a.png";
-import howItWorksImage from "figma:asset/8af298e8ee0a79576b997833aa1c4e834973fae1.png";
-import whoItsForImage from "figma:asset/fcce1fb5b1fde396ab87e3f8522610b0e21f58c8.png";
+// Assets (🚨 Ensure all figma:asset imports are fixed to @/assets)
+import logoImage from "@/assets/4cfd463b1380bb2fa69d95e0b6157e3dc2be26a2.png";
+import heroImage from "@/assets/5ad8a9d5cc5ee93c07b1d414ba2c84cc581de69a.png";
+import howItWorksImage from "@/assets/8af298e8ee0a79576b997833aa1c4e834973fae1.png";
+import whoItsForImage from "@/assets/fcce1fb5b1fde396ab87e3f8522610b0e21f58c8.png";
 
 export default function App() {
   // State
   const [language, setLanguage] = useState<Language>("de");
   const [currentForm, setCurrentForm] = useState<FormType>("none");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [savedScrollPosition, setSavedScrollPosition] = useState(0);
+  // Removed savedScrollPosition state as history API will track it
   const [isReturning, setIsReturning] = useState(false);
 
   // Refs
@@ -58,35 +58,76 @@ export default function App() {
 
   // Translation helper
   const t = translations[language];
+  
+  // Helper to map state to URL path
+  const formToPath = (form: FormType) => form === 'none' ? '/' : `/${form}`;
 
-  // Navigation handlers
+  // 1. PUSH STATE: Use useEffect to update the URL when the form state changes
+  useEffect(() => {
+    const path = formToPath(currentForm);
+    
+    // Get current scroll position to save to history state
+    const currentScrollY = window.scrollY;
+    
+    // Check to prevent pushing duplicate states or the initial load (unless changing from none)
+    if (window.location.pathname !== path) {
+      // Use pushState for genuine navigation
+      window.history.pushState({ form: currentForm, scrollY: currentScrollY }, '', path);
+    }
+  }, [currentForm]);
+
+  // 2. POP STATE: Use useEffect to listen for browser back/forward buttons
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      const state = event.state as { form: FormType, scrollY: number };
+      
+      if (state && state.form) {
+        // Restore form state from history
+        setCurrentForm(state.form);
+        
+        // Restore scroll position for the homepage/main view
+        if (state.form === 'none' && state.scrollY > 0) {
+          setIsReturning(true);
+          // Use a slight delay to ensure the component renders before scrolling
+          setTimeout(() => {
+            window.scrollTo(0, state.scrollY);
+            setIsReturning(false);
+          }, 50);
+        }
+      } else if (window.location.pathname === '/') {
+        // Handle direct navigation back to home ('/') when state is empty (e.g., initial state)
+        setCurrentForm('none');
+        scrollToTop('instant');
+      }
+    };
+
+    // Replace the initial state to capture the current scroll position for returning home
+    window.history.replaceState({ form: currentForm, scrollY: window.scrollY }, '', formToPath(currentForm));
+
+    window.addEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []); // Run only once on mount
+
+  // Navigation handlers (simplified, relying on useEffect for history management)
   const handleJobSeekerClick = () => {
-    setSavedScrollPosition(getCurrentScrollPosition());
+    // Scroll position is captured by the pushState useEffect
     setCurrentForm("jobseeker");
     setMobileMenuOpen(false);
   };
 
   const handleEmployerWaitlistClick = () => {
-    setSavedScrollPosition(getCurrentScrollPosition());
+    // Scroll position is captured by the pushState useEffect
     setCurrentForm("employer");
     setMobileMenuOpen(false);
   };
 
   const handleBackToHome = () => {
-    setIsReturning(true);
+    // This uses a replaceState logic since we are navigating "back" from a form/legal page
+    // and want the browser history to handle the scroll restoration on the main page.
     setCurrentForm("none");
     setMobileMenuOpen(false);
-    
-    const targetScrollPosition = savedScrollPosition;
-    
-    if (targetScrollPosition > 0) {
-      window.scrollTo(0, targetScrollPosition);
-    }
-    
-    setTimeout(() => {
-      restoreScrollPosition(targetScrollPosition);
-      setIsReturning(false);
-    }, 100);
   };
 
   const handleBackToHomepageTop = () => {
@@ -111,7 +152,7 @@ export default function App() {
   };
 
   const handleLegalPageNavigation = (page: "imprint" | "privacy" | "terms" | "cookies") => {
-    setSavedScrollPosition(getCurrentScrollPosition());
+    // Scroll position is captured by the pushState useEffect
     setCurrentForm(page);
     scrollToTop('instant');
   };

@@ -4,7 +4,7 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { ArrowLeft, Building2, CheckCircle, Languages, Sparkles, Users, ArrowRight, Menu, X } from "lucide-react";
-import logoImage from 'figma:asset/4cfd463b1380bb2fa69d95e0b6157e3dc2be26a2.png';
+import logoImage from '@/assets/4cfd463b1380bb2fa69d95e0b6157e3dc2be26a2.png'; // 🚨 FIX
 import { Footer } from './Footer';
 
 interface EmployerWaitlistFormProps {
@@ -265,13 +265,13 @@ export function EmployerWaitlistForm({ language, onHome, onSwitchToJobSeeker, on
             <Button
               onClick={onHome}
               className="relative overflow-hidden group text-white px-6 lg:px-8 py-3 text-sm lg:text-base rounded-xl transition-all duration-500 min-h-[48px] shadow-2xl transform hover:scale-105 hover:-translate-y-1 flex items-center gap-2 touch-manipulation cursor-pointer"
-              style={{ backgroundColor: '#ff7700' }}
+              style={{ backgroundColor: ': #0078ab' }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#e66600';
+                e.currentTarget.style.backgroundColor = ': #0078ab';
                 e.currentTarget.style.boxShadow = '0 25px 50px -12px rgba(255, 119, 0, 0.4)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#ff7700';
+                e.currentTarget.style.backgroundColor = ': #0078ab';
                 e.currentTarget.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)';
               }}
             >

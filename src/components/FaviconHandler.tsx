@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import faviconImage from 'figma:asset/ff8e33c66bea863f12622ae01e6afbda269ceb8c.png';
+import faviconImage from '@/assets/ff8e33c66bea863f12622ae01e6afbda269ceb8c.png';
 
 export function FaviconHandler() {
   useEffect(() => {

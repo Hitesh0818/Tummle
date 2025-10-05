@@ -3,7 +3,7 @@ import { Rocket, Play, ArrowRight, Star, Users } from "lucide-react";
 import { CTAButton } from "../common/CTAButton";
 import { translations } from "../../constants/translations";
 import { Language } from "../../types";
-import heroImage from "figma:asset/5ad8a9d5cc5ee93c07b1d414ba2c84cc581de69a.png";
+import heroImage from "@/assets/5ad8a9d5cc5ee93c07b1d414ba2c84cc581de69a.png";
 
 interface HeroSectionProps {
   language: Language;
