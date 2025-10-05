@@ -146,7 +146,7 @@ export function EmployerWaitlistForm({ language, onHome, onSwitchToJobSeeker, on
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!validateForm()) {
@@ -155,11 +155,45 @@ export function EmployerWaitlistForm({ language, onHome, onSwitchToJobSeeker, on
 
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      // 🚨 Actual Backend API Call for Employer Waitlist
+      const response = await fetch('http://localhost:5000/api/employer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        
+        // Handle 409 Conflict (Duplicate Email)
+        if (response.status === 409 && errorData.error.includes('Email already on waitlist')) {
+          setErrors(prev => ({ ...prev, email: errorData.error }));
+        } else {
+          // General failure
+          throw new Error(errorData.error || 'Waitlist submission failed');
+        }
+        
+        // Return early on error
+        return;
+      }
+
+      // Success
       setSubmitted(true);
-    }, 1500);
+      // Scroll to top to show success message clearly
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+    } catch (error) {
+      console.error('Employer Submission Error:', error);
+      alert(language === 'de' 
+        ? 'Ein Netzwerkfehler ist aufgetreten. Bitte versuchen Sie es später erneut.' 
+        : 'A network error occurred. Please try again later.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (submitted) {

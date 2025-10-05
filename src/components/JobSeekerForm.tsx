@@ -703,7 +703,7 @@ export function JobSeekerForm({ language, onHome, onSwitchToEmployer, onLanguage
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+ const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!validateForm()) {
@@ -712,10 +712,54 @@ export function JobSeekerForm({ language, onHome, onSwitchToEmployer, onLanguage
 
     setIsSubmitting(true);
     
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      // 🚨 Actual Backend API Call for Job Seeker Registration
+      const response = await fetch('http://localhost:5000/api/jobseeker', { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        // Attempt to parse server error message
+        const errorData = await response.json();
+        
+        // Handle 409 Conflict (Duplicate Email)
+        if (response.status === 409 && errorData.error.includes('Email already registered')) {
+          setErrors(prev => ({ ...prev, email: errorData.error }));
+        } 
+        // Handle 400 Bad Request (Validation Errors)
+        else if (response.status === 400 && errorData.details) {
+            // Mongoose validation errors often return a complex object.
+            // Simplified error display for the user.
+            alert(language === 'de' 
+                ? 'Bitte überprüfen Sie die Formularfelder auf fehlende oder ungültige Eingaben.'
+                : 'Please check the form for missing or invalid inputs.'
+            );
+        } else {
+            throw new Error(errorData.error || 'Job Seeker registration failed');
+        }
+        
+        // Return early on error so we don't proceed to success state
+        return; 
+      }
+
+      // Success
       setSubmitted(true);
-    }, 2000);
+      // Scroll to top to show success message clearly
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    } catch (error) {
+      console.error('Job Seeker Submission Error:', error);
+      alert(language === 'de' 
+        ? 'Ein Netzwerkfehler ist aufgetreten. Bitte versuchen Sie es später erneut.' 
+        : 'A network error occurred. Please try again later.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleRoleSelect = (option: {value: string, label: string}) => {
