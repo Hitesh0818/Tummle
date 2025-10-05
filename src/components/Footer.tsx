@@ -1,5 +1,5 @@
 import { Mail, Facebook, Linkedin, Instagram } from "lucide-react";
-import logoImage from 'figma:asset/4cfd463b1380bb2fa69d95e0b6157e3dc2be26a2.png';
+import logoImage from '@/assets/4cfd463b1380bb2fa69d95e0b6157e3dc2be26a2.png';
 
 interface FooterProps {
   language: 'de' | 'en';

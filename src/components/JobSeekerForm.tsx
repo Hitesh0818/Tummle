@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table";
 import { ArrowLeft, Calendar, MapPin, Clock, GraduationCap, User, CheckCircle, X, Plus, Languages, Shield, Menu, ArrowRight, Facebook, Linkedin, Instagram, Sun, Moon, Sunrise } from "lucide-react";
-import logoImage from 'figma:asset/4cfd463b1380bb2fa69d95e0b6157e3dc2be26a2.png';
+import logoImage from '@/assets/4cfd463b1380bb2fa69d95e0b6157e3dc2be26a2.png'; // 🚨 FIX
 import { Footer } from './Footer';
 import { GooglePlacesAutocomplete } from './GooglePlacesAutocomplete';
 
@@ -728,6 +728,7 @@ export function JobSeekerForm({ language, onHome, onSwitchToEmployer, onLanguage
       jobRoles: [...prev.jobRoles, newRole]
     }));
   };
+
 
   const handleRoleRemove = (roleToRemove: RoleWithExperience) => {
     setFormData(prev => ({
