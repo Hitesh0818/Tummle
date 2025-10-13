@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 // Sub-schema for nested complex objects
 const RoleWithExperienceSchema = new mongoose.Schema({

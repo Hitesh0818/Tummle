@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-
+import mongoose from 'mongoose';
 const EmployerWaitlistSchema = new mongoose.Schema({
     email: { 
         type: String, 

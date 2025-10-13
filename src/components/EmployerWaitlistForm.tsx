@@ -4,7 +4,7 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { ArrowLeft, Building2, CheckCircle, Languages, Sparkles, Users, ArrowRight, Menu, X } from "lucide-react";
-import logoImage from '@/assets/4cfd463b1380bb2fa69d95e0b6157e3dc2be26a2.png'; // 🚨 FIX
+import logoImage from '@/assets/4cfd463b1380bb2fa69d95e0b6157e3dc2be26a2.png'; 
 import { Footer } from './Footer';
 
 interface EmployerWaitlistFormProps {
