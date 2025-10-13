@@ -25,7 +25,7 @@ const translations = {
     legalTerms: "Allgemeine Geschäftsbedingungen",
     legalCookies: "Cookie-Richtlinie",
     followUs: "Folge uns",
-    copyright: "© 2024 TUMMLE. Alle Rechte vorbehalten.",
+    copyright: "© 2025 TUMMLE. Alle Rechte vorbehalten.",
     
     // Contact
     contactEmail: "support@tummle.com"
@@ -44,7 +44,7 @@ const translations = {
     legalTerms: "Terms and Conditions",
     legalCookies: "Cookie Policy",
     followUs: "Follow Us",
-    copyright: "© 2024 TUMMLE. All rights reserved.",
+    copyright: "© 2025 TUMMLE. All rights reserved.",
     
     // Contact
     contactEmail: "support@tummle.com"

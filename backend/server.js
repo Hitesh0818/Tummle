@@ -1,15 +1,12 @@
-// backend/server.js
-
-const dotenv = require('dotenv');
+import dotenv from 'dotenv'; 
 dotenv.config(); 
 
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-// Import the email utility function
-const { sendConfirmationEmail } = require('./utils/emailSender'); 
-// The following line is correctly REMOVED to avoid the SyntaxError and redundancy:
-// const nodemailer = require('nodemailer'); 
+import express from 'express'; 
+import mongoose from 'mongoose'; 
+import cors from 'cors'; 
+import { sendConfirmationEmail } from './utils/emailSender.js'; 
+import JobSeeker from './models/JobSeeker.js'; 
+import EmployerWaitlist from './models/EmployerWaitlist.js'; 
 
 const app = express();
 const PORT = process.env.PORT || 5000;

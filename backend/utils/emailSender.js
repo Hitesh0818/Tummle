@@ -1,9 +1,7 @@
 // backend/utils/emailSender.js
 
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 
-// These environment variables are now guaranteed to be loaded 
-// because dotenv.config() runs first in server.js.
 const EMAIL_USER = process.env.EMAIL_USER;
 const EMAIL_PASS = process.env.EMAIL_PASS;
 const SENDER_EMAIL = process.env.SENDER_EMAIL; // hitesh.babariya@tummle.com
