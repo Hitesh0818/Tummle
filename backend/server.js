@@ -1,55 +1,38 @@
-import dotenv from 'dotenv'; 
+import dotenv from 'dotenv';
 dotenv.config(); 
 
+// 2. Convert all remaining requires to imports (Fixes ReferenceError)
 import express from 'express'; 
-import mongoose from 'mongoose'; 
-import cors from 'cors'; 
+import mongoose from 'mongoose';
+import cors from 'cors';
 import { sendConfirmationEmail } from './utils/emailSender.js'; 
-import JobSeeker from './models/JobSeeker.js'; 
-import EmployerWaitlist from './models/EmployerWaitlist.js'; 
+import JobSeeker from './models/JobSeeker.js'; // Must use .js extension
+import EmployerWaitlist from './models/EmployerWaitlist.js'; // Must use .js extension
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000; //
 
-// Middleware
-app.use(cors());
-app.use(express.json()); 
-
-// Database Connection 
+// Middleware and DB connection...
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('MongoDB Connected...'))
     .catch(err => console.log('MongoDB connection error:', err));
 
-// --- Import Models ---
-const JobSeeker = require('./models/JobSeeker'); //
-const EmployerWaitlist = require('./models/EmployerWaitlist'); //
 
 // --- API Routes ---
 
-/**
- * @route POST /api/jobseeker
- * @desc Register a new job seeker and send confirmation email
- * @access Public
- */
 app.post('/api/jobseeker', async (req, res) => {
     try {
         const { dateFrom, firstName, email } = req.body; 
-
-        const jobSeekerData = {
-            ...req.body,
-            dateFrom: new Date(dateFrom),
-            dateUntil: req.body.dateUntil ? new Date(req.body.dateUntil) : undefined,
-        };
+        // ... (data processing)
 
         const newJobSeeker = new JobSeeker(jobSeekerData);
         await newJobSeeker.save();
         
-        // --- Call Email Utility ---
+        // 3. Email sending logic added
         sendConfirmationEmail(email, firstName)
             .catch(err => {
                 console.error('Failed to send Job Seeker confirmation email:', err.message);
             });
-        // -------------------------
 
         res.status(201).json({ 
             message: 'Job Seeker registration successful', 
@@ -57,37 +40,23 @@ app.post('/api/jobseeker', async (req, res) => {
         });
 
     } catch (err) {
-        if (err.name === 'ValidationError') {
-            return res.status(400).json({ error: err.message, details: err.errors });
-        }
-        if (err.code === 11000) { // Duplicate email
-            return res.status(409).json({ error: 'Email already registered' });
-        }
-        console.error(err);
-        res.status(500).send('Server Error');
+        // ... (error handling)
     }
 });
 
-/**
- * @route POST /api/employer
- * @desc Add employer to the waitlist and send confirmation email
- * @access Public
- */
 app.post('/api/employer', async (req, res) => {
     try {
         const { email, name } = req.body;
-        
         const firstName = name.split(' ')[0] || 'Applicant';
 
         const newEmployer = new EmployerWaitlist(req.body);
         await newEmployer.save();
         
-        // --- Call Email Utility ---
+        // 3. Email sending logic added
         sendConfirmationEmail(email, firstName) 
             .catch(err => {
                 console.error('Failed to send Employer confirmation email:', err.message);
             });
-        // -------------------------
 
         res.status(201).json({ 
             message: 'Employer successfully added to waitlist', 
@@ -95,16 +64,8 @@ app.post('/api/employer', async (req, res) => {
         });
 
     } catch (err) {
-        if (err.name === 'ValidationError') {
-            return res.status(400).json({ error: err.message, details: err.errors });
-        }
-        if (err.code === 11000) {
-            return res.status(409).json({ error: 'Email already on waitlist' });
-        }
-        console.error(err);
-        res.status(500).send('Server Error');
+        // ... (error handling)
     }
 });
 
-// --- Start Server ---
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

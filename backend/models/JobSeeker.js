@@ -59,4 +59,4 @@ const JobSeekerSchema = new mongoose.Schema({
     registrationDate: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('JobSeeker', JobSeekerSchema);
+export default mongoose.model('JobSeeker', JobSeekerSchema);
