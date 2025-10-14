@@ -2,22 +2,40 @@
 
 import nodemailer from 'nodemailer';
 
-const EMAIL_USER = process.env.EMAIL_USER;
-const EMAIL_PASS = process.env.EMAIL_PASS;
-const SENDER_EMAIL = process.env.SENDER_EMAIL; // hitesh.babariya@tummle.com
+// Module-scoped variable to hold the initialized transporter (starts as null)
+let emailTransporter = null; 
 
-// 1. Create a Transporter
-const transporter = nodemailer.createTransport({
-    host: process.env.EMAIL_HOST, // mail.all-inkl.com
-    port: process.env.EMAIL_PORT, // 587
-    secure: process.env.EMAIL_PORT == 465, // false for port 587
-    auth: {
-        user: EMAIL_USER,
-        pass: EMAIL_PASS,
-    },
-    logger: true,
-    debug: true
-});
+/**
+ * Initializes the Nodemailer transporter using environment variables.
+ * This is called only once on the first email attempt, guaranteeing ENVs are loaded.
+ */
+function createTransporter() {
+    const EMAIL_USER = process.env.EMAIL_USER;
+    const EMAIL_PASS = process.env.EMAIL_PASS;
+    const EMAIL_HOST = process.env.EMAIL_HOST;
+    const EMAIL_PORT_INT = parseInt(process.env.EMAIL_PORT, 10) || 587; // Default to 587 if missing
+
+    // CRITICAL SAFETY CHECK: If the host is missing, we stop here.
+    if (!EMAIL_HOST) {
+        console.error("ERROR: EMAIL_HOST is missing. Cannot create mail transporter.");
+        return null;
+    }
+
+    console.log(`[DEBUG] Initializing Transporter for: ${EMAIL_HOST}:${EMAIL_PORT_INT}`);
+    
+    return nodemailer.createTransport({
+        host: EMAIL_HOST,
+        port: EMAIL_PORT_INT,
+        // Use strict numeric comparison: true for 465 (SSL), false for 587 (STARTTLS)
+        secure: EMAIL_PORT_INT === 465, 
+        auth: {
+            user: EMAIL_USER,
+            pass: EMAIL_PASS,
+        },
+        logger: true,
+        debug: true
+    });
+}
 
 /**
  * Sends a confirmation email to the user.
@@ -25,6 +43,17 @@ const transporter = nodemailer.createTransport({
  * @param {string} firstName - The recipient's first name.
  */
 async function sendConfirmationEmail(toEmail, firstName) {
+    // 1. Lazy-load the transporter on first use
+    if (!emailTransporter) {
+        emailTransporter = createTransporter();
+    }
+    
+    // 2. Check if creation failed (due to missing ENV)
+    if (!emailTransporter) {
+        return { success: false, error: new Error('Mail configuration error: Transporter not initialized.') };
+    }
+
+    const SENDER_EMAIL = process.env.SENDER_EMAIL;
     const safeFirstName = firstName || 'Applicant';
 
     const mailOptions = {
@@ -50,11 +79,10 @@ async function sendConfirmationEmail(toEmail, firstName) {
     };
 
     try {
-        let info = await transporter.sendMail(mailOptions);
+        let info = await emailTransporter.sendMail(mailOptions);
         console.log('Confirmation email sent successfully: %s', info.messageId);
         return { success: true, messageId: info.messageId };
     } catch (error) {
-        // The error log that helped identify the ECONNREFUSED error
         console.error('ERROR sending confirmation email:', error.message); 
         return { success: false, error };
     }
