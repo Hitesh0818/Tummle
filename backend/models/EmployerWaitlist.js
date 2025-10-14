@@ -11,4 +11,4 @@ const EmployerWaitlistSchema = new mongoose.Schema({
     joinDate: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('EmployerWaitlist', EmployerWaitlistSchema);
+export default mongoose.model('EmployerWaitlist', EmployerWaitlistSchema);

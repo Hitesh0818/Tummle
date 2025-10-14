@@ -60,6 +60,6 @@ async function sendConfirmationEmail(toEmail, firstName) {
     }
 }
 
-module.exports = {
+export {
     sendConfirmationEmail
 };
