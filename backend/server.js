@@ -9,7 +9,7 @@ import JobSeeker from './models/JobSeeker.js';
 import EmployerWaitlist from './models/EmployerWaitlist.js'; 
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+
 
 // Middleware
 app.use(cors());
@@ -104,5 +104,4 @@ app.post('/api/employer', async (req, res) => {
     }
 });
 
-// --- Start Server ---
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+export default app;
