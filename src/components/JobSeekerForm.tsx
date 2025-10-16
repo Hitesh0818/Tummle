@@ -715,6 +715,7 @@ export function JobSeekerForm({ language, onHome, onSwitchToEmployer, onLanguage
     try {
       // 🚨 Actual Backend API Call for Job Seeker Registration
       const response = await fetch('https://tummle-be.vercel.app/', { 
+        console.log('Job Seeker Submission Data:'),
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
