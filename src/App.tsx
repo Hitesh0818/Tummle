@@ -233,8 +233,7 @@ export default function App() {
       
       
         {/* 🛑 NEW MAINTENANCE BANNER 🛑 */}
-        <div className="text-center py-2 bg-red-600 text-white font-bold text-sm sm:text-base sticky top-0 z-[60]">
-            ⚠️ THE SITE IS CURRENTLY UNDER MAINTENANCE ⚠️
+<div className="text-center py-2 bg-red-600 text-white font-bold text-sm sm:text-base">            ⚠️ THE SITE IS CURRENTLY UNDER MAINTENANCE ⚠️
         </div>
         {/* 🛑 END NEW MAINTENANCE BANNER 🛑 */}
       
