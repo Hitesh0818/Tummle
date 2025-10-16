@@ -157,7 +157,7 @@ const handleSubmit = async (e: React.FormEvent) => {
     
     try {
       // 🚨 Actual Backend API Call for Employer Waitlist
-      const response = await fetch('https://tummle-be.vercel.app/api/employer', {
+      const response = await fetch('https://tummle-be.vercel.app/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
