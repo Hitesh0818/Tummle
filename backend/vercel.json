@@ -2,11 +2,11 @@
   "version": 2,
   "builds": [
     {
-      "src": "backend/server.js", 
+      "src": "backend/server.js",
       "use": "@vercel/node"
     },
     {
-      "src": "package.json",
+      "src": "/package.json",
       "use": "@vercel/static-build",
       "config": {
         "outputDirectory": "build"
@@ -16,11 +16,11 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/backend/server.js" 
+      "dest": "/backend/server.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/build/$1" 
+      "dest": "/build/$1"
     }
   ]
 }
