@@ -74,6 +74,13 @@ export default function App() {
       // Use pushState for genuine navigation
       window.history.pushState({ form: currentForm, scrollY: currentScrollY }, '', path);
     }
+    useEffect(() => {
+      const path = window.location.pathname.substring(1);
+      if (path) {
+        setCurrentForm(path as FormType);
+      }
+    }, []);
+
   }, [currentForm]);
 
   // 2. POP STATE: Use useEffect to listen for browser back/forward buttons
