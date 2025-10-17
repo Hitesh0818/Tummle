@@ -128,7 +128,6 @@ const translations = {
     driver: "Fahrer/in",
     salesAssistant: "Verkäufer/in",
     receptionist: "Rezeptionist/in",
-    // NOTE: The 'security' job role translation that caused the duplicate key error is removed here.
     warehouse: "Lagerarbeiter/in",
     bartender: "Barkeeper/in",
     housekeeper: "Hauskeeper/in",
@@ -289,7 +288,6 @@ const translations = {
     driver: "Driver",
     salesAssistant: "Sales Assistant",
     receptionist: "Receptionist",
-    // REMOVED: security: "Security Guard", // This was the conflicting job role translation.
     warehouse: "Warehouse Worker",
     bartender: "Bartender",
     housekeeper: "Housekeeper",
