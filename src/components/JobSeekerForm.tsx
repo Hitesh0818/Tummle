@@ -128,13 +128,12 @@ const translations = {
     driver: "Fahrer/in",
     salesAssistant: "Verkäufer/in",
     receptionist: "Rezeptionist/in",
+    // NOTE: The 'security' job role translation that caused the duplicate key error is removed here.
     warehouse: "Lagerarbeiter/in",
     bartender: "Barkeeper/in",
     housekeeper: "Hauskeeper/in",
     deliveryDriver: "Lieferfahrer/in",
     kitchenHelper: "Küchenhelfer/in",
-    
-
     
     // Days
     monday: "Montag",
@@ -290,13 +289,12 @@ const translations = {
     driver: "Driver",
     salesAssistant: "Sales Assistant",
     receptionist: "Receptionist",
+    // REMOVED: security: "Security Guard", // This was the conflicting job role translation.
     warehouse: "Warehouse Worker",
     bartender: "Bartender",
     housekeeper: "Housekeeper",
     deliveryDriver: "Delivery Driver",
     kitchenHelper: "Kitchen Helper",
-    
-
     
     // Days
     monday: "Monday",
@@ -560,6 +558,7 @@ export function JobSeekerForm({ language, onHome, onSwitchToEmployer, onLanguage
     { value: 'driver', label: t.driver },
     { value: 'salesAssistant', label: t.salesAssistant },
     { value: 'receptionist', label: t.receptionist },
+    // The conflicting job role option is permanently removed from here.
     { value: 'warehouse', label: t.warehouse },
     { value: 'bartender', label: t.bartender },
     { value: 'housekeeper', label: t.housekeeper },
@@ -573,7 +572,6 @@ export function JobSeekerForm({ language, onHome, onSwitchToEmployer, onLanguage
     { value: 'advanced', label: t.advanced },
     { value: 'professional', label: t.professional }
   ];
-
 
 
   const educationOptions = [
