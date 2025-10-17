@@ -4,5 +4,16 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
-  ]
+  ],
+  "build": {
+    "env": {
+      "VITE_APP_ENV": "production"
+    },
+    "maxDuration": 300 
+  },
+  "crons": [],
+  "dev": {
+    "framework": "vite"
+  },
+  "outputDirectory": "build" 
 }
