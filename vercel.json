@@ -19,12 +19,8 @@
       "dest": "/backend/server.js" 
     },
     {
-      "src": "/[^.]+", 
+      "src": "/[^.]+",
       "dest": "/build/index.html" 
-    },
-    { 
-      "src": "/(.*)",
-      "dest": "/build/index.html"
     }
   ]
 }
