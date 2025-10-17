@@ -29,5 +29,5 @@
     }
   },
   "include": ["src", "components", "styles"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  
 }
