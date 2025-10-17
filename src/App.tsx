@@ -61,7 +61,13 @@ export default function App() {
   
   // Helper to map state to URL path
   const formToPath = (form: FormType) => form === 'none' ? '/' : `/${form}`;
-
+  useEffect(() => {
+    const path = window.location.pathname.substring(1);
+    if (path) {
+      setCurrentForm(path as FormType);
+    }
+  }, []);
+ 
   // 1. PUSH STATE: Use useEffect to update the URL when the form state changes
   useEffect(() => {
     const path = formToPath(currentForm);
@@ -74,8 +80,8 @@ export default function App() {
       // Use pushState for genuine navigation
       window.history.pushState({ form: currentForm, scrollY: currentScrollY }, '', path);
     }
-    
 
+    
   }, [currentForm]);
 
   // 2. POP STATE: Use useEffect to listen for browser back/forward buttons
