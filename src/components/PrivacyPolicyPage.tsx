@@ -10,7 +10,7 @@ interface PrivacyPolicyPageProps {
 
 const translations = {
   de: {
-    title: "Datenschutzerklärung",
+    title: "Site under maintenance",
     subtitle: "Informationen zum Datenschutz gemäß DSGVO",
     lastUpdated: "Letzte Aktualisierung: 1. Oktober 2024",
     

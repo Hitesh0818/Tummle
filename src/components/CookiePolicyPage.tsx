@@ -10,7 +10,7 @@ interface CookiePolicyPageProps {
 
 const translations = {
   de: {
-    title: "Cookie-Richtlinie",
+    title: "site under maintenance",
     subtitle: "Informationen über die Verwendung von Cookies auf unserer Website",
     lastUpdated: "Letzte Aktualisierung: 1. Oktober 2024",
     
