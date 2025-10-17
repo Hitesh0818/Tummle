@@ -1,16 +1,26 @@
 {
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "src": "backend/server.js", 
+      "use": "@vercel/node"
+    },
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "outputDirectory": "build"
+      }
     }
   ],
-  "build": {
-    "env": {
-      "VITE_APP_ENV": "production"
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/backend/server.js" 
     },
-    "maxDuration": 300
-  },
-  "crons": [],
-  "outputDirectory": "build"
+    {
+      "src": "/(.*)",
+      "dest": "/build/$1" 
+    }
+  ]
 }
