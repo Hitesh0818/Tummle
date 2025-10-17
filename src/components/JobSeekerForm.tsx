@@ -129,14 +129,12 @@ const translations = {
     driver: "Fahrer/in",
     salesAssistant: "Verkäufer/in",
     receptionist: "Rezeptionist/in",
-    security: "Sicherheitsdienst",
+    securityRole: "Sicherheitsdienst", // ← renamed to avoid duplicate key
     warehouse: "Lagerarbeiter/in",
     bartender: "Barkeeper/in",
     housekeeper: "Hauskeeper/in",
     deliveryDriver: "Lieferfahrer/in",
     kitchenHelper: "Küchenhelfer/in",
-    
-
     
     // Days
     monday: "Montag",
@@ -293,14 +291,12 @@ const translations = {
     driver: "Driver",
     salesAssistant: "Sales Assistant",
     receptionist: "Receptionist",
-    security: "Security Guard",
+    securityRole: "Security Guard", // ← renamed to avoid duplicate key
     warehouse: "Warehouse Worker",
     bartender: "Bartender",
     housekeeper: "Housekeeper",
     deliveryDriver: "Delivery Driver",
     kitchenHelper: "Kitchen Helper",
-    
-
     
     // Days
     monday: "Monday",
@@ -564,7 +560,7 @@ export function JobSeekerForm({ language, onHome, onSwitchToEmployer, onLanguage
     { value: 'driver', label: t.driver },
     { value: 'salesAssistant', label: t.salesAssistant },
     { value: 'receptionist', label: t.receptionist },
-    { value: 'security', label: t.security },
+    { value: 'security', label: t.securityRole }, // ← updated to use securityRole
     { value: 'warehouse', label: t.warehouse },
     { value: 'bartender', label: t.bartender },
     { value: 'housekeeper', label: t.housekeeper },
@@ -578,8 +574,6 @@ export function JobSeekerForm({ language, onHome, onSwitchToEmployer, onLanguage
     { value: 'advanced', label: t.advanced },
     { value: 'professional', label: t.professional }
   ];
-
-
 
   const educationOptions = [
     { value: 'basic', label: t.basicEducation },
@@ -624,7 +618,7 @@ export function JobSeekerForm({ language, onHome, onSwitchToEmployer, onLanguage
     { value: 'safety', label: t.safety },
     { value: 'forklift', label: t.forklift },
     { value: 'crane', label: t.crane },
-    { value: 'security', label: t.security },
+    { value: 'security', label: t.security }, // certification keeps key "security"
     { value: 'bartending', label: t.bartending },
     { value: 'sommelier', label: t.sommelier },
     { value: 'lifeguard', label: t.lifeguard },
@@ -772,7 +766,6 @@ export function JobSeekerForm({ language, onHome, onSwitchToEmployer, onLanguage
       jobRoles: [...prev.jobRoles, newRole]
     }));
   };
-
 
   const handleRoleRemove = (roleToRemove: RoleWithExperience) => {
     setFormData(prev => ({
@@ -1679,8 +1672,6 @@ export function JobSeekerForm({ language, onHome, onSwitchToEmployer, onLanguage
                   </div>
                 </div>
               )}
-
-
             </CardContent>
           </Card>
 
@@ -1982,8 +1973,6 @@ export function JobSeekerForm({ language, onHome, onSwitchToEmployer, onLanguage
                   />
                 </div>
               </div>
-
-
             </CardContent>
           </Card>
 
