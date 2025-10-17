@@ -116,7 +116,6 @@ const translations = {
     safety: "Arbeitsschutz",
     forklift: "Gabelstaplerführerschein",
     crane: "Kranführerschein",
-    security: "Sicherheitsdienst",
     bartending: "Barkeeper-Zertifikat",
     sommelier: "Sommelier",
     lifeguard: "Rettungsschwimmer",
@@ -129,12 +128,13 @@ const translations = {
     driver: "Fahrer/in",
     salesAssistant: "Verkäufer/in",
     receptionist: "Rezeptionist/in",
-    securityRole: "Sicherheitsdienst", // ← renamed to avoid duplicate key
     warehouse: "Lagerarbeiter/in",
     bartender: "Barkeeper/in",
     housekeeper: "Hauskeeper/in",
     deliveryDriver: "Lieferfahrer/in",
     kitchenHelper: "Küchenhelfer/in",
+    
+
     
     // Days
     monday: "Montag",
@@ -278,7 +278,6 @@ const translations = {
     safety: "Occupational Safety",
     forklift: "Forklift License",
     crane: "Crane License",
-    security: "Security License",
     bartending: "Bartending Certificate",
     sommelier: "Sommelier",
     lifeguard: "Lifeguard",
@@ -291,12 +290,13 @@ const translations = {
     driver: "Driver",
     salesAssistant: "Sales Assistant",
     receptionist: "Receptionist",
-    securityRole: "Security Guard", // ← renamed to avoid duplicate key
     warehouse: "Warehouse Worker",
     bartender: "Bartender",
     housekeeper: "Housekeeper",
     deliveryDriver: "Delivery Driver",
     kitchenHelper: "Kitchen Helper",
+    
+
     
     // Days
     monday: "Monday",
@@ -560,7 +560,6 @@ export function JobSeekerForm({ language, onHome, onSwitchToEmployer, onLanguage
     { value: 'driver', label: t.driver },
     { value: 'salesAssistant', label: t.salesAssistant },
     { value: 'receptionist', label: t.receptionist },
-    { value: 'security', label: t.securityRole }, // ← updated to use securityRole
     { value: 'warehouse', label: t.warehouse },
     { value: 'bartender', label: t.bartender },
     { value: 'housekeeper', label: t.housekeeper },
@@ -574,6 +573,8 @@ export function JobSeekerForm({ language, onHome, onSwitchToEmployer, onLanguage
     { value: 'advanced', label: t.advanced },
     { value: 'professional', label: t.professional }
   ];
+
+
 
   const educationOptions = [
     { value: 'basic', label: t.basicEducation },
@@ -618,7 +619,6 @@ export function JobSeekerForm({ language, onHome, onSwitchToEmployer, onLanguage
     { value: 'safety', label: t.safety },
     { value: 'forklift', label: t.forklift },
     { value: 'crane', label: t.crane },
-    { value: 'security', label: t.security }, // certification keeps key "security"
     { value: 'bartending', label: t.bartending },
     { value: 'sommelier', label: t.sommelier },
     { value: 'lifeguard', label: t.lifeguard },
@@ -708,7 +708,7 @@ export function JobSeekerForm({ language, onHome, onSwitchToEmployer, onLanguage
     
     try {
       // 🚨 Actual Backend API Call for Job Seeker Registration
-      const response = await fetch('https://tummle-be-git-main-hiteshs-projects-52ac4287.vercel.app/', { 
+      const response = await fetch('https://tummle-1jwaisxfz-hiteshs-projects-52ac4287.vercel.app', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -766,6 +766,7 @@ export function JobSeekerForm({ language, onHome, onSwitchToEmployer, onLanguage
       jobRoles: [...prev.jobRoles, newRole]
     }));
   };
+
 
   const handleRoleRemove = (roleToRemove: RoleWithExperience) => {
     setFormData(prev => ({
@@ -1672,6 +1673,8 @@ export function JobSeekerForm({ language, onHome, onSwitchToEmployer, onLanguage
                   </div>
                 </div>
               )}
+
+
             </CardContent>
           </Card>
 
@@ -1973,6 +1976,8 @@ export function JobSeekerForm({ language, onHome, onSwitchToEmployer, onLanguage
                   />
                 </div>
               </div>
+
+
             </CardContent>
           </Card>
 
