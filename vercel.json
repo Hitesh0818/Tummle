@@ -9,11 +9,8 @@
     "env": {
       "VITE_APP_ENV": "production"
     },
-    "maxDuration": 300 
+    "maxDuration": 300
   },
   "crons": [],
-  "dev": {
-    "framework": "vite"
-  },
-  "outputDirectory": "build" 
+  "outputDirectory": "build"
 }
