@@ -10,7 +10,7 @@ interface ImprintPageProps {
 
 const translations = {
   de: {
-    title: "Site Under Construction",
+    title: "Impressum",
     subtitle: "Angaben gemäß § 5 TMG",
     companyInfo: "Unternehmensangaben",
     companyName: "Tummle GmbH",
@@ -35,7 +35,7 @@ const translations = {
     backToHome: "Zurück zur Startseite"
   },
   en: {
-    title: "Imprint",
+    title: "Site Under maintenance",
     subtitle: "Information according to § 5 TMG (German Telemedia Act)",
     companyInfo: "Company Information",
     companyName: "Tummle GmbH",
