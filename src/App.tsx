@@ -230,14 +230,8 @@ export default function App() {
   // Main landing page
   return (
     <div className="min-h-[100dvh] bg-gradient-to-br from-white via-primary/5 to-secondary/10 overflow-x-hidden relative safe-area-bottom">
-      
-      
-        {/* 🛑 NEW MAINTENANCE BANNER 🛑 */}
-<div className="text-center py-2 bg-red-600 text-white font-bold text-sm sm:text-base">            ⚠️ THE SITE IS CURRENTLY UNDER MAINTENANCE ⚠️
-        </div>
-        {/* 🛑 END NEW MAINTENANCE BANNER 🛑 */}
-      
       <FaviconHandler />
+      
       {/* Returning indicator */}
       {isReturning && (
         <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 bg-primary/90 backdrop-blur-sm text-white px-4 py-2 rounded-full shadow-lg">
