@@ -74,12 +74,7 @@ export default function App() {
       // Use pushState for genuine navigation
       window.history.pushState({ form: currentForm, scrollY: currentScrollY }, '', path);
     }
-    useEffect(() => {
-      const path = window.location.pathname.substring(1);
-      if (path) {
-        setCurrentForm(path as FormType);
-      }
-    }, []);
+    
 
   }, [currentForm]);
 
