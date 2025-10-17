@@ -28,5 +28,6 @@
       "@/styles/*": ["./styles/*"]
     }
   },
-  "include": ["src", "components", "styles"]
+  "include": ["src", "components", "styles"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
