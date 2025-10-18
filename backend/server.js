@@ -8,9 +8,14 @@ dotenv.config({ path: "backend/config/config.env" });
 
 const app = express();
 
+// --- 2. ADD DETAILED CORS CONFIGURATION ---
+// This section allows your frontend application to communicate with your backend.
+// It's a security feature that you must configure for deployed applications.
 
 const allowedOrigins = [
-    'https://www.tummle.com',  
+    'https://www.tummle.com',      // Your deployed frontend domain
+
+];
 
 const corsOptions = {
   origin: function (origin, callback) {
