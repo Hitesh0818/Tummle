@@ -61,12 +61,7 @@ export default function App() {
   
   // Helper to map state to URL path
   const formToPath = (form: FormType) => form === 'none' ? '/' : `/${form}`;
-  useEffect(() => {
-    const path = window.location.pathname.substring(1);
-    if (path) {
-      setCurrentForm(path as FormType);
-    }
-  }, []);
+
  
   // 1. PUSH STATE: Use useEffect to update the URL when the form state changes
   useEffect(() => {
