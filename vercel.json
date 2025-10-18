@@ -9,7 +9,7 @@
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "outputDirectory": "."
+        "outputDirectory": "build"
       }
     }
   ],
@@ -20,14 +20,6 @@
     },
     {
       "handle": "filesystem"
-    },
-    {
-      "src": "/JobSeekerForm",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/EmployerWaitlistForm",
-      "dest": "/index.html"
     },
     {
       "src": "/(.*)",
