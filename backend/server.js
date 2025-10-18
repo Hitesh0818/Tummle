@@ -38,6 +38,7 @@ app.post('/api/jobseeker', async (req, res) => {
             dateFrom: new Date(dateFrom),
             dateUntil: req.body.dateUntil ? new Date(req.body.dateUntil) : undefined,
         };
+        console.log('Registering Job Seeker:', jobSeekerData);
 
         const newJobSeeker = new JobSeeker(jobSeekerData);
         await newJobSeeker.save();
@@ -79,6 +80,8 @@ app.post('/api/employer', async (req, res) => {
 
         const newEmployer = new EmployerWaitlist(req.body);
         await newEmployer.save();
+
+        console.log('Added Employer to Waitlist:', newEmployer);
         
         // --- Call Email Utility ---
         sendConfirmationEmail(email, firstName) 
